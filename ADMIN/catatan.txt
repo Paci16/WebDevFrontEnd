@@ -1,0 +1,65 @@
+<!-- total semua baris di layar ada 12 rows
+isset untuk mengecek apakah ada yang terkirim atau tidak
+
+<?php
+    include 'include/config.php';
+    if(isset($_POST['Simpan']))
+    {
+        $destinasiKODE = $_POST['kodedestinasi'];
+        $destinasiNAMA = $_POST['namadestinasi'];
+        $kategoriKODE = $_POST['kodekategori'];
+        
+        mysqli_query($connection, "insert into destinasi values ('$destinasiKODE', '$destinasiNAMA', '$kategoriKODE')");
+        header("location:destinasi.php");
+
+    }
+?>
+
+
+ cara memanggil database :
+ menggunakan pembuka lagi php untuk memasukannya kedalam php
+
+
+
+//ini bagian buat manggil database untuk destinasi
+<table class="table table-dark">
+  <thead>
+    <tr>
+      <th scope="col">No</th>
+      <th scope="col">Kode destinasi</th>
+      <th scope="col">Nama destinasi</th>
+      <th scope="col">Kode Kategori</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+
+<?php
+//ini buat select nya
+$query = mysqli_query($connection, "select destinasi. * from destinasi");
+
+
+//inisialisasi untuk memunculkan nomor (urutan gitu)
+$nomor = 1;
+while($row = mysqli_fetch_array($query))
+
+{
+?>
+     <tr>
+        <td><?php echo $nomor;?></td>
+        <td><?php echo $row['destinasiKODE'];?></td>       //napa pakai row? karna isi yang ada di baris database
+        <td><?php echo $row['destinasiNAMA'];?></td>       //isi rownya harus sama nama entitas nya yang ada didatabase
+        <td><?php echo $row['kategoriKODE'];?></td>
+    </tr>
+
+<?php $nomor = $nomor + 1 ?>
+<?php } ?>
+
+  </tbody>
+</table>
+
+didalam script ada case sensitive
+
+
+
+-->
